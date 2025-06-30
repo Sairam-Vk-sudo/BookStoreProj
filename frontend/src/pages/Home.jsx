@@ -17,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(`${import.meta.env.VITE_BACKEND_LINK}api/seeBooks`)
+      .get(`http://localhost:5000/api/seeBooks`)
       .then((response) => {
         setBooks(response.data)
         setLoading(false)
@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
   if (token) {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_LINK}api/wishlist`, {
+      .get(`http://localhost:5000/api/wishlist`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -55,7 +55,7 @@ const isInWishlist = (bookId) => {
   const toggleWishlist = async (bookId) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_LINK}api/wishlist/${bookId}`,
+      `http://localhost:5000/api/wishlist/${bookId}`,
       {},
       {
         headers: {

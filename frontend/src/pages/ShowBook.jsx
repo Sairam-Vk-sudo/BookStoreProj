@@ -14,7 +14,7 @@ const ShowBook = () => {
   useEffect(() => {
     console.log("Fetching book with ID:", id)
     axios
-    .get(`${import.meta.env.VITE_BACKEND_LINK}api/seeBook/${id}`)
+    .get(`http://localhost:5000/api/seeBook/${id}`)
     .then((response) => {
       setBook(response.data)
       setLoading(false)

@@ -19,7 +19,7 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(`${import.meta.env.VITE_BACKEND_LINK}api/updateBook/${id}`)
+      .get(`http://localhost:5000/api/seeBook/${id}`)
       .then((response) => {
         setBook(response.data)
         setTitle(response.data.title)
@@ -32,7 +32,7 @@ const EditBook = () => {
         console.error("Error fetching book:", err)
         setLoading(false)
       })
-  })
+  }, [id])
 
   const handleEditBook = () => {
     const updatedBookData = {
@@ -43,7 +43,7 @@ const EditBook = () => {
     }
     setLoading(true)
     axios
-      .put(`${import.meta.env.VITE_BACKEND_LINK}api/updateBook/${id}`, updatedBookData)
+      .put(`http://localhost:5000/api/updateBook/${id}`, updatedBookData)
       .then(() => {
         setLoading(false)
         navigate(`/`)

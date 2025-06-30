@@ -14,7 +14,7 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true)
     axios
-      .delete(`${import.meta.env.VITE_BACKEND_LINK}/deleteBook/${id}`)
+      .delete(`http://localhost:5000/deleteBook/${id}`)
       .then(() => {
         setLoading(false)
         navigate('/')

@@ -15,7 +15,7 @@ const MyWishlist = () => {
         setLoading(true)
         setError(null)
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_LINK}api/wishlist`, {
+            const response = await axios.get(`http://localhost:5000/api/wishlist`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

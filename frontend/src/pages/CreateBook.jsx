@@ -4,6 +4,7 @@ import axios from 'axios'
 import Spinner from '../components/Spinner'
 import { Link, useNavigate } from 'react-router-dom'
 import BackButton from '../components/BackButton'
+import  {jwtDecode}  from 'jwt-decode'
 
 
 const CreateBook = () => {
@@ -16,22 +17,31 @@ const CreateBook = () => {
   const navigate = useNavigate()
 
   const handleSaveBook = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (!user || !user.username) {
-        console.log(user.username)
-        throw new Error('User not logged in');
-        }
+    const token = localStorage.getItem('token')
+  if (!token) {
+    throw new Error('User not logged in')
+  }
+  let username
+  try {
+    const decoded = jwtDecode(token)
+    username = decoded.username 
+  } catch (err) {
+    throw new Error('Invalid token')
+  }
+  if (!username) {
+    throw new Error('Username not found in token')
+  }
 
     const bookData = {
       title,
       author,
       description,
       publishedDate,
-      addedBy: user.username 
+      addedBy: username 
     }
     setLoading(true)
     axios
-      .post(`${import.meta.env.VITE_BACKEND_LINK}api/addBook`, bookData)
+      .post(`http://localhost:5000/api/addBook`, bookData)
       .then(() => {
         setLoading(false)
         navigate('/')

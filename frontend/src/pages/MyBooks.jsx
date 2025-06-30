@@ -16,7 +16,7 @@ const myBooks = () => {
       const fetchBooks = async () => {
         try{
           setLoading(true)
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND_LINK}api/myBooks`, {
+          const response = await axios.get(`http://localhost:5000/api/myBooks`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }
